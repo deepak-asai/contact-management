@@ -1,14 +1,21 @@
-const SuccessJS = require('../dto/successDTO');
+const successJS = require('../dto/successDTO');
+const contactService = require('../service/contactService');
 
 module.exports = {
-    createContact: (req, res, next) => {
+    createContact: async (req, res, next) => {
         try {
-            var contacts = req.body;
-            var successDTO = new SuccessJS();
-            successDTO.
-            res.json("success");
+            var contact = req.body;
+            await contactService.createContact(contact);
+            console.log("Contact created successfully");
+
+            var successDTO = new successJS.SuccessDTO();
+            successDTO.successMessage = "Contact created successfully";
+            res.json(successDTO);
+
         } catch (err) {
-            console.log(err);
+            console.log("Error occured during creating the contact: ", err);
+            res.status(500);
+            res.json(err);
         }
     },
 }
