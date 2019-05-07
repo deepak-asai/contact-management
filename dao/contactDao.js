@@ -22,12 +22,12 @@ exports.searchContact = async function (keyword) {
                 }
             },
             {
-                "number_tags.number": {
+                "number_tags.numbers": {
                     $regex: keywordPattern
                 }
             },
             {
-                "email_tags.email": {
+                "email_tags.emails": {
                     $regex: keywordPattern
                 }
             },
