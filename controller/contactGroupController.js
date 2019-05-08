@@ -1,15 +1,15 @@
 const successJS = require('../dto/successDTO');
-const contactService = require('../service/contactService');
+const contactGroupService = require('../service/contactGroupService');
 
 module.exports = {
-    createContact: async (req, res, next) => {
+    createContactGroup: async (req, res, next) => {
         try {
-            var contact = req.body;
-            await contactService.createContact(contact);
-            console.log("Contact created successfully");
+            var contactGroup = req.body;
+            await contactGroupService.createContactGroup(contactGroup);
+            console.log("Contact Group created successfully");
 
             var successDTO = new successJS.SuccessDTO();
-            successDTO.successMessage = "Contact created successfully";
+            successDTO.successMessage = "Contact Group created successfully";
             res.json(successDTO);
 
         } catch (err) {
@@ -19,10 +19,10 @@ module.exports = {
         }
     },
 
-    deleteContact: async (req, res, next) => {
+    deleteContactGroup: async (req, res, next) => {
         try {
-            var contactId = req.params.contactId;
-            await contactService.deleteContact(contactId);
+            var contactGroupId = req.params.contactGroupId;
+            await contactGroupService.deleteContactGroup(contactGroupId);
             console.log("Contact deleted successfully");
 
             var successDTO = new successJS.SuccessDTO();
@@ -36,10 +36,10 @@ module.exports = {
         }
     },
 
-    searchContact: async (req, res, next) => {
+    searchContactGroup: async (req, res, next) => {
         try {
-            var keyword = req.params.keyword;
-            var contactsList = await contactService.searchContact(keyword);
+            var keyword = req.params.contactGroupId;
+            var contactsList = await contactGroupService.searchContactGroup(keyword);
 
             var successDTO = new successJS.SuccessDTO();
             successDTO.successMessage = "Contact search was successful";
@@ -54,33 +54,32 @@ module.exports = {
         }
     },
 
-    updateContact: async (req, res, next) => {
+    updateContactGroup: async (req, res, next) => {
         try {
-            var contact = req.body;
-            var id = contact.id;
-            delete contact['id'];
+            var contactGroup = req.body;
+            var id = contactGroup.id;
+            delete contactGroup['id'];
 
-            await contactService.updateContact(id, contact);
+            await contactGroupService.updateContactGroup(id, contactGroup);
 
             var successDTO = new successJS.SuccessDTO();
-            successDTO.successMessage = "Contact update was successful";
+            successDTO.successMessage = "Contact Group update was successful";
 
             res.json(successDTO);
 
         } catch (err) {
-            console.log("Error occured during updating the contact: ", err);
+            console.log("Error occured during updating the contact group: ", err);
             res.status(err.errorCode);
             res.json(err);
         }
     },
-
-    listAllContacts: async (req, res, next) => {
+    listAllContactGroups: async (req, res, next) => {
         try {
-            var contactsList = await contactService.listAllContacts();
+            var contactGroupList = await contactGroupService.listAllContactGroups();
 
             var successDTO = new successJS.SuccessDTO();
             successDTO.successMessage = "Listing contacts was successful";
-            successDTO.data = contactsList;
+            successDTO.data = contactGroupList;
 
             res.json(successDTO);
 

@@ -46,3 +46,27 @@ exports.updateContact = async function (id, contact) {
     };
     return await crudOperations.update('contact', updateCriteria, contact);
 }
+
+exports.listAllContacts = async function () {
+    var searchCriteria = {};
+    var sortCriteria = {
+        "createdDate": -1
+    }
+    return await crudOperations.search('contact', searchCriteria, sortCriteria);
+}
+
+exports.getContactsForIds = async function (contactListIds) {
+    var contactListMongoIds = [];
+
+    for (var contactListIds_iter in contactListIds) {
+        contactListMongoIds.push(new mongo.ObjectID(contactListIds[contactListIds_iter]));
+    }
+
+    var query = {
+        '_id': {
+            $in: contactListMongoIds
+        }
+    }
+
+    return await crudOperations.search('contact', query, {});
+}

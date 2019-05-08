@@ -15,3 +15,12 @@ exports.searchContact = async function (keyword) {
 exports.updateContact = async function (id, contact) {
     return await contactDao.updateContact(id, contact);
 }
+
+exports.listAllContacts = async function () {
+    return await contactDao.listAllContacts();
+}
+
+//used in contactGroupValidator
+exports.getContactsForIds = async function (contactIds) {
+    return await contactDao.getContactsForIds(contactIds);
+}
