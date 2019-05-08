@@ -26,7 +26,8 @@ mongoUtil.connect(function (err, client) {
     if (err) console.log(err);
     console.log("db connected");
 
-    app.listen(5001, function () {
+    var server = app.listen(5001, function () {
         console.log("Running rest on port " + 5001);
     });
+    module.exports = server;
 });
