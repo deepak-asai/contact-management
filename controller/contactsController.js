@@ -5,11 +5,12 @@ module.exports = {
     createContact: async (req, res, next) => {
         try {
             var contact = req.body;
-            await contactService.createContact(contact);
+            var contactId = await contactService.createContact(contact);
             console.log("Contact created successfully");
 
             var successDTO = new successJS.SuccessDTO();
             successDTO.successMessage = "Contact created successfully";
+            successDTO.data = contactId;
             res.json(successDTO);
 
         } catch (err) {

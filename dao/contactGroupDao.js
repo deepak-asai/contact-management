@@ -2,7 +2,7 @@ const crudOperations = require('./crudOperations');
 const mongo = require('mongodb');
 
 exports.createContactGroup = async function (contactGroup) {
-    await crudOperations.insert('contact-groups', contactGroup)
+    return await crudOperations.insert('contact-groups', contactGroup)
 }
 
 exports.getContactGroupByName = async function (contactGroupName) {

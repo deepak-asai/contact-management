@@ -13,8 +13,9 @@ exports.insert = async function (collectionName, object) {
 
                 return reject(errorDTO);
             }
+
             console.log("Document Inserted");
-            return resolve();
+            return resolve(res.insertedId);
 
         });
     });

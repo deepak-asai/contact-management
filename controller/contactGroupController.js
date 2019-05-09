@@ -5,15 +5,16 @@ module.exports = {
     createContactGroup: async (req, res, next) => {
         try {
             var contactGroup = req.body;
-            await contactGroupService.createContactGroup(contactGroup);
+            var contactGroupId = await contactGroupService.createContactGroup(contactGroup);
             console.log("Contact Group created successfully");
 
             var successDTO = new successJS.SuccessDTO();
             successDTO.successMessage = "Contact Group created successfully";
+            successDTO.data = contactGroupId;
             res.json(successDTO);
 
         } catch (err) {
-            console.log("Error occured during creating the contact: ", err);
+            console.log("Error occured during creating the contact group: ", err);
             res.status(err.errorCode);
             res.json(err);
         }
@@ -23,14 +24,13 @@ module.exports = {
         try {
             var contactGroupId = req.params.contactGroupId;
             await contactGroupService.deleteContactGroup(contactGroupId);
-            console.log("Contact deleted successfully");
 
             var successDTO = new successJS.SuccessDTO();
-            successDTO.successMessage = "Contact deleted successfully";
+            successDTO.successMessage = "Contact Group deleted successfully";
             res.json(successDTO);
 
         } catch (err) {
-            console.log("Error occured during deleting the contact: ", err);
+            console.log("Error occured during deleting the contact group: ", err);
             res.status(err.errorCode);
             res.json(err);
         }
@@ -42,7 +42,7 @@ module.exports = {
             var contactsList = await contactGroupService.searchContactGroup(keyword);
 
             var successDTO = new successJS.SuccessDTO();
-            successDTO.successMessage = "Contact search was successful";
+            successDTO.successMessage = "Contact Group search was successful";
             successDTO.data = contactsList;
 
             res.json(successDTO);

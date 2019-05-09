@@ -1,7 +1,7 @@
 var contactDao = require('../dao/contactDao');
 exports.createContact = async function (contact) {
     contact.createdDate = new Date();
-    await contactDao.createContact(contact);
+    return await contactDao.createContact(contact);
 }
 
 exports.deleteContact = async function (id) {

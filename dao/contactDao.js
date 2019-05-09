@@ -2,7 +2,7 @@ const crudOperations = require('./crudOperations');
 const mongo = require('mongodb');
 
 exports.createContact = async function (contact) {
-    await crudOperations.insert('contact', contact)
+    return await crudOperations.insert('contact', contact);
 }
 
 exports.deleteContact = async function (id) {

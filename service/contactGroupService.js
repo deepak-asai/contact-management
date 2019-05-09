@@ -2,7 +2,7 @@ var contactGroupDao = require('../dao/contactGroupDao');
 var contactService = require('../service/contactService');
 
 exports.createContactGroup = async function (contactGroup) {
-    await contactGroupDao.createContactGroup(contactGroup);
+    return await contactGroupDao.createContactGroup(contactGroup);
 }
 
 exports.getContactGroupByName = async function (contactGroupName) {
